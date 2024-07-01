@@ -18,3 +18,9 @@ docker exec -it 70f kafka-console-producer --topic demo_topic --bootstrap-server
 ```bash
 docker exec -it 70f kafka-console-consumer --topic demo_topic --bootstrap-server localhost:9092 
 ```
+
+
+### Commande pour augmenter un nombre de partition
+```bash
+docker exec 70f kafka-topics --alter --topic critical_notifications --bootstrap-server localhost:9092 --partitions 3
+```
