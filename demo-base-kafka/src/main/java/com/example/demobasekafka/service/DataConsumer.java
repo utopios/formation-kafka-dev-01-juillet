@@ -10,6 +10,6 @@ public class DataConsumer {
     @KafkaListener(topics = "demo_topic", groupId = "demo-id")
     public void listenData(String message, Acknowledgment acknowledgment) {
         System.out.println("Received message "+message);
-        //acknowledgment.acknowledge();
+        acknowledgment.acknowledge();
     }
 }
