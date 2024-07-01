@@ -16,7 +16,8 @@ public class MessagePartitioner implements Partitioner {
             return criticalMsgPartition;
         } else {
             int numPartitions = cluster.availablePartitionsForTopic(topic).size();
-            return (key.hashCode() & Integer.MAX_VALUE) % (numPartitions - 1) + 1;
+            //return (key.hashCode() & Integer.MAX_VALUE) % (numPartitions - 1) + 1;
+            return 0;
         }
     }
 
