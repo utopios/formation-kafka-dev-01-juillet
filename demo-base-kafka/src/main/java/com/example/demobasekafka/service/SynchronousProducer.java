@@ -17,7 +17,7 @@ public class SynchronousProducer {
     }
 
     public void sendMessage(String topic, String message) {
-        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic, message);
+        CompletableFuture<SendResult<String, String>> future = kafkaTemplate.send(topic,"custom_key", message);
         try {
             SendResult<String, String> result = future.get();
             System.out.printf("Sent message to topic %s partition %d offset %d%n",
