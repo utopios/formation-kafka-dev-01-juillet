@@ -26,7 +26,7 @@ public class NotificationProducerService {
 
     public void sendCriticalNotification(String topic, String message) {
         try {
-            kafkaTemplateSync.send(topic, message).get();
+            kafkaTemplateSync.send(topic,"new_message", message).get();
         }catch (InterruptedException | ExecutionException ex) {
             Thread.currentThread().interrupt();
             throw new RuntimeException("Failed to send message", ex);
@@ -34,7 +34,7 @@ public class NotificationProducerService {
     }
 
     public void sendGeneralNotification(String topic, String message) {
-        kafkaTemplateAsync.send(topic,message).whenCompleteAsync((result, ex) -> {
+        kafkaTemplateAsync.send(topic,"general_message",message).whenCompleteAsync((result, ex) -> {
            if(ex != null) {
                System.out.println("Message sent successfully");
            }else {
