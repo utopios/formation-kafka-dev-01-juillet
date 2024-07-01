@@ -11,5 +11,6 @@ public class DataConsumer {
     public void listenData(String message, Acknowledgment acknowledgment) {
         System.out.println("Received message "+message);
         acknowledgment.acknowledge();
+        
     }
 }
