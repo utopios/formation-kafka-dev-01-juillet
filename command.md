@@ -24,3 +24,8 @@ docker exec -it 70f kafka-console-consumer --topic demo_topic --bootstrap-server
 ```bash
 docker exec 70f kafka-topics --alter --topic critical_notifications --bootstrap-server localhost:9092 --partitions 3
 ```
+
+### Commande pour soumettre une tache connector
+```bash
+curl -X POST -H "Content-type: application/json" --data @connector-mysql.json http://localhost:8083/connectors
+```
