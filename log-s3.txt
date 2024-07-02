@@ -1,0 +1,38 @@
+[2024-07-02 10:07:20,105] INFO Added plugin 'io.confluent.connect.s3.S3SinkConnector' (org.apache.kafka.connect.runtime.isolation.DelegatingClassLoader)
+[2024-07-02 10:07:26,915] INFO Added aliases 'S3SinkConnector' and 'S3Sink' to plugin 'io.confluent.connect.s3.S3SinkConnector' (org.apache.kafka.connect.runtime.isolation.DelegatingClassLoader)
+[2024-07-02 10:07:40,231] INFO Validating s3 Configs (io.confluent.connect.s3.S3SinkConnectorValidator)
+[2024-07-02 10:07:40,231] INFO S3SinkConnectorConfig values: 
+ (io.confluent.connect.s3.S3SinkConnectorConfig)
+[2024-07-02 10:07:40,366] INFO Creating connector s3-sink-connector of type io.confluent.connect.s3.S3SinkConnector (org.apache.kafka.connect.runtime.Worker)
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+[2024-07-02 10:07:40,368] INFO Instantiated connector s3-sink-connector with version 10.5.13 of type class io.confluent.connect.s3.S3SinkConnector (org.apache.kafka.connect.runtime.Worker)
+[2024-07-02 10:07:40,373] INFO S3SinkConnectorConfig values: 
+ (io.confluent.connect.s3.S3SinkConnectorConfig)
+[2024-07-02 10:07:40,379] INFO Starting S3 connector s3-sink-connector (io.confluent.connect.s3.S3SinkConnector)
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+[2024-07-02 10:07:40,554] INFO S3SinkConnectorConfig values: 
+ (io.confluent.connect.s3.S3SinkConnectorConfig)
+[2024-07-02 10:17:10,596] INFO Shutting down S3 connector s3-sink-connector (io.confluent.connect.s3.S3SinkConnector)
+[2024-07-02 10:17:44,468] INFO Added plugin 'io.confluent.connect.s3.S3SinkConnector' (org.apache.kafka.connect.runtime.isolation.DelegatingClassLoader)
+[2024-07-02 10:17:51,894] INFO Added aliases 'S3SinkConnector' and 'S3Sink' to plugin 'io.confluent.connect.s3.S3SinkConnector' (org.apache.kafka.connect.runtime.isolation.DelegatingClassLoader)
+[2024-07-02 10:17:54,042] INFO Creating connector s3-sink-connector of type io.confluent.connect.s3.S3SinkConnector (org.apache.kafka.connect.runtime.Worker)
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+[2024-07-02 10:17:54,835] INFO S3SinkConnectorConfig values: 
+ (io.confluent.connect.s3.S3SinkConnectorConfig)
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+[2024-07-02 10:17:54,838] INFO Instantiated connector s3-sink-connector with version 10.5.13 of type class io.confluent.connect.s3.S3SinkConnector (org.apache.kafka.connect.runtime.Worker)
+[2024-07-02 10:17:54,848] INFO S3SinkConnectorConfig values: 
+ (io.confluent.connect.s3.S3SinkConnectorConfig)
+[2024-07-02 10:17:54,852] INFO Starting S3 connector s3-sink-connector (io.confluent.connect.s3.S3SinkConnector)
+	connector.class = io.confluent.connect.s3.S3SinkConnector
+	connector.class = io.confluent.connect.s3.S3SinkConnector
