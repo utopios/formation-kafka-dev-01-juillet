@@ -46,16 +46,16 @@ services:
             KAFKA_JMX_HOSTNAME: localhost
             KAFKA_BROKER_RACK: rack-0
             KAFKA_OPTS: -javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar=8091:/tmp/kafka_config.yml
-            KAFKA_MIN_INSYNC_REPLICAS: 1
+            KAFKA_MIN_INSYNC_REPLICAS: 2
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
-            KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 1
-            KAFKA_CONFLUENT_CLUSTER_LINK_ENABLE: False
-            KAFKA_CONFLUENT_REPORTERS_TELEMETRY_AUTO_ENABLE: False
-            KAFKA_DEFAULT_REPLICATION_FACTOR: 1
+            KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_CONFLUENT_CLUSTER_LINK_ENABLE: True
+            KAFKA_CONFLUENT_REPORTERS_TELEMETRY_AUTO_ENABLE: True
+            KAFKA_DEFAULT_REPLICATION_FACTOR: 3
             KAFKA_BROKER_ID: 1
             KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
-            KAFKA_CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
-            KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:19091
+            KAFKA_CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 3
+            KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:19091,kafka-2:19092,kafka-3:19093
         cap_add:
             - NET_ADMIN
         ports:
@@ -63,6 +63,92 @@ services:
             - 10002:10002
             - 10102:8091
             - 10201:8090
+        volumes:
+            - $PWD/volumes/jmx_prometheus_javaagent-0.20.0.jar:/tmp/jmx_prometheus_javaagent-0.20.0.jar
+            - $PWD/volumes/kafka_config.yml:/tmp/kafka_config.yml
+
+    kafka-2:
+        image: confluentinc/cp-server:7.3.1
+        hostname: kafka-2
+        container_name: kafka-2
+
+        healthcheck:
+            test: curl -fail --silent http://kafka-2:8090/kafka/v3/clusters/ --output /dev/null || exit 1
+            interval: 10s
+            retries: 10
+            start_period: 20s
+        depends_on:
+            - zookeeper-1
+        environment:
+            KAFKA_LISTENERS: PLAINTEXT://kafka-2:19092, EXTERNAL://0.0.0.0:9092
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-2:19092, EXTERNAL://localhost:9092
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+            KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+            KAFKA_JMX_PORT: 10003
+            KAFKA_JMX_HOSTNAME: localhost
+            KAFKA_BROKER_RACK: rack-0
+            KAFKA_OPTS: -javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar=8091:/tmp/kafka_config.yml
+            KAFKA_MIN_INSYNC_REPLICAS: 2
+            KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+            KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_CONFLUENT_CLUSTER_LINK_ENABLE: True
+            KAFKA_CONFLUENT_REPORTERS_TELEMETRY_AUTO_ENABLE: True
+            KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+            KAFKA_BROKER_ID: 2
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+            KAFKA_CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 3
+            KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:19091,kafka-2:19092,kafka-3:19093
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - 9092:9092
+            - 10003:10003
+            - 10103:8091
+            - 10202:8090
+        volumes:
+            - $PWD/volumes/jmx_prometheus_javaagent-0.20.0.jar:/tmp/jmx_prometheus_javaagent-0.20.0.jar
+            - $PWD/volumes/kafka_config.yml:/tmp/kafka_config.yml
+
+    kafka-3:
+        image: confluentinc/cp-server:7.3.1
+        hostname: kafka-3
+        container_name: kafka-3
+
+        healthcheck:
+            test: curl -fail --silent http://kafka-3:8090/kafka/v3/clusters/ --output /dev/null || exit 1
+            interval: 10s
+            retries: 10
+            start_period: 20s
+        depends_on:
+            - zookeeper-1
+        environment:
+            KAFKA_LISTENERS: PLAINTEXT://kafka-3:19093, EXTERNAL://0.0.0.0:9093
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-3:19093, EXTERNAL://localhost:9093
+            KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+            KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+            KAFKA_JMX_PORT: 10004
+            KAFKA_JMX_HOSTNAME: localhost
+            KAFKA_BROKER_RACK: rack-0
+            KAFKA_OPTS: -javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar=8091:/tmp/kafka_config.yml
+            KAFKA_MIN_INSYNC_REPLICAS: 2
+            KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
+            KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
+            KAFKA_CONFLUENT_CLUSTER_LINK_ENABLE: True
+            KAFKA_CONFLUENT_REPORTERS_TELEMETRY_AUTO_ENABLE: True
+            KAFKA_DEFAULT_REPLICATION_FACTOR: 3
+            KAFKA_BROKER_ID: 3
+            KAFKA_ZOOKEEPER_CONNECT: zookeeper-1:2181
+            KAFKA_CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 3
+            KAFKA_CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS: kafka-1:19091,kafka-2:19092,kafka-3:19093
+        cap_add:
+            - NET_ADMIN
+        ports:
+            - 9093:9093
+            - 10004:10004
+            - 10104:8091
+            - 10203:8090
         volumes:
             - $PWD/volumes/jmx_prometheus_javaagent-0.20.0.jar:/tmp/jmx_prometheus_javaagent-0.20.0.jar
             - $PWD/volumes/kafka_config.yml:/tmp/kafka_config.yml
@@ -80,9 +166,13 @@ services:
         depends_on:
             kafka-1:
                 condition: service_healthy
+            kafka-2:
+                condition: service_healthy
+            kafka-3:
+                condition: service_healthy
         environment:
             SCHEMA_REGISTRY_HOST_NAME: schema-registry-1
-            SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka-1:19091
+            SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: kafka-1:19091,kafka-2:19092,kafka-3:19093
             SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
             SCHEMA_REGISTRY_OPTS: -javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar=8091:/tmp/schema-registry.yml
         ports:
@@ -104,13 +194,17 @@ services:
         depends_on:
             kafka-1:
                 condition: service_healthy
+            kafka-2:
+                condition: service_healthy
+            kafka-3:
+                condition: service_healthy
             schema-registry-1:
                 condition: service_healthy
         environment:
             CONNECT_REST_ADVERTISED_PORT: 8083
             CONNECT_REST_PORT: 8083
             CONNECT_LISTENERS: http://0.0.0.0:8083
-            CONNECT_BOOTSTRAP_SERVERS: kafka-1:19091
+            CONNECT_BOOTSTRAP_SERVERS: kafka-1:19091,kafka-2:19092,kafka-3:19093
             CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect-1
             CONNECT_GROUP_ID: kafka-connect
             CONNECT_CONFIG_STORAGE_TOPIC: _connect-configs
@@ -120,9 +214,9 @@ services:
             CONNECT_VALUE_CONVERTER: io.confluent.connect.avro.AvroConverter
             CONNECT_EXACTLY_ONCE_SOURCE_SUPPORT: enabled
             CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL: http://schema-registry-1:8081
-            CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
-            CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
-            CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+            CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 3
+            CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 3
+            CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 3
             CONNECT_PLUGIN_PATH: /usr/share/java,/usr/share/confluent-hub-components,/data/connect-plugin-jars
             KAFKA_OPTS: -javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar=8091:/tmp/kafka_connect.yml
         ports:
