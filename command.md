@@ -29,3 +29,8 @@ docker exec 70f kafka-topics --alter --topic critical_notifications --bootstrap-
 ```bash
 curl -X POST -H "Content-type: application/json" --data @connector-mysql.json http://localhost:8083/connectors
 ```
+
+## Commande pour démarrer un conteneur postgres
+```bash
+docker run --name postgres-container -e POSTGRES_PASSWORD=yourpassword -p 5432:5432 -d --network kafka-docker-composer_default postgres
+```
