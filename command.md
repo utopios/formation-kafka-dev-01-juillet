@@ -34,3 +34,10 @@ curl -X POST -H "Content-type: application/json" --data @connector-mysql.json ht
 ```bash
 docker run --name postgres-container -e POSTGRES_PASSWORD=yourpassword -p 5432:5432 -d --network kafka-docker-composer_default postgres
 ```
+
+
+### Commande partie registry
+- Enregistrement manuel par l'api
+```bash
+curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" --data @user.json http://localhost:8081/subjects/user-value/versions
+```
