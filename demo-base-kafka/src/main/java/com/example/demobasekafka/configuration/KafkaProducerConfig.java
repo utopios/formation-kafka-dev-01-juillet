@@ -1,6 +1,7 @@
 package com.example.demobasekafka.configuration;
 
 import com.example.demobasekafka.dto.User;
+import com.example.demobasekafka.dto.UserAvro;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
@@ -13,6 +14,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.support.serializer.JsonSerializer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -45,10 +47,10 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, User> kafkaTemplateUser() {
+    public KafkaTemplate<String, UserAvro> kafkaTemplateUser() {
         Map<String, Object> configProps = commonConfig();
         configProps.put(ProducerConfig.ACKS_CONFIG, "all");
-        ProducerFactory<String, User> producerFactory = new DefaultKafkaProducerFactory<>(configProps);
+        ProducerFactory<String, UserAvro> producerFactory = new DefaultKafkaProducerFactory<>(configProps);
         return new KafkaTemplate<>(producerFactory);
     }
 
