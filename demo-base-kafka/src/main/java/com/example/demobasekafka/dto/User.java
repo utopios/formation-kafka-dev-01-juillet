@@ -1,9 +1,8 @@
 package com.example.demobasekafka.dto;
 
-import lombok.Data;
+import org.apache.kafka.common.protocol.types.Field;
 
-@Data
 public class User {
-    private Integer id;
+    private int Id;
     private String name;
 }

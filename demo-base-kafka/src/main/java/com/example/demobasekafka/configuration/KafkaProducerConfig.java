@@ -1,8 +1,5 @@
 package com.example.demobasekafka.configuration;
 
-import com.example.demobasekafka.dto.User;
-import com.example.demobasekafka.dto.UserAvro;
-import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +30,7 @@ public class KafkaProducerConfig {
         configProps.put("critical.partition", criticalPartition);
         configProps.put("schema.registry.url", "http://localhost:8081");
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         configProps.put(ProducerConfig.PARTITIONER_CLASS_CONFIG, MessagePartitioner.class);
         return configProps;
     }
@@ -47,10 +44,10 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public KafkaTemplate<String, UserAvro> kafkaTemplateUser() {
+    public KafkaTemplate<String, User> kafkaTemplateUser() {
         Map<String, Object> configProps = commonConfig();
         configProps.put(ProducerConfig.ACKS_CONFIG, "all");
-        ProducerFactory<String, UserAvro> producerFactory = new DefaultKafkaProducerFactory<>(configProps);
+        ProducerFactory<String, User> producerFactory = new DefaultKafkaProducerFactory<>(configProps);
         return new KafkaTemplate<>(producerFactory);
     }
 

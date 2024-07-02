@@ -1,7 +1,5 @@
 package com.example.demobasekafka.controller;
 
-import com.example.demobasekafka.dto.User;
-import com.example.demobasekafka.dto.UserAvro;
 import org.springframework.http.ResponseEntity;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +18,7 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<?> sendUser(@RequestBody User user) {
-        kafkaTemplate.send("demo-user", user.getName(), UserAvro.builder().User(user).build());
+        kafkaTemplate.send("user-json", user.getName(), UserAvro.builder().User(user).build());
         return ResponseEntity.ok().build();
     }
 }
