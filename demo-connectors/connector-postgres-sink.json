@@ -13,6 +13,6 @@
         "pk.mode": "none",
         "pk.fields": "id",
         "fields.whitelist": "id, valeur",
-        "table.whitelist": "data_destination"
+        "table.name.format": "data_destination"
     }
 }
