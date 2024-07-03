@@ -48,3 +48,18 @@ curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" --data @u
 1. Collecte des logs "TOPIC"
 2. Traitement des logs "Stream"
 3. Alert "TOPIC"
+
+### Ajout d'un serveur ksqldb
+
+```bash
+docker run -d \
+--name=ksqldb-server \
+--network=kafka-docker-composer_default \
+-e KSQL_LISTENERS=http://0.0.0.0:8088 \
+-e KSQL_BOOTSTRAP_SERVERS=kafka-1:19091 \
+-e KSQL_KSQL_SCHEMA_REGISTRY_URL=http://schema-registry:8081 \
+-e KSQL_KSQL_LOGGING_PROCESSING_STREAM_AUTO_CREATE='true' \
+-e KSQL_KSQL_LOGGING_PROCESSING_TOPIC_AUTO_CREATE='true' \
+-p 8088:8088 \
+confluentinc/cp-ksqldb-server:latest
+```
