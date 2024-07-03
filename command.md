@@ -54,6 +54,7 @@ curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" --data @u
 ```bash
 docker run -d \
 --name=ksqldb-server \
+-v ($pwd)/extenstions:/etc/ksql/ext \
 --network=kafka-docker-composer_default \
 -e KSQL_LISTENERS=http://0.0.0.0:8088 \
 -e KSQL_BOOTSTRAP_SERVERS=kafka-1:19091 \
