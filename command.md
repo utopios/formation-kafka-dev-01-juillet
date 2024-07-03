@@ -66,6 +66,38 @@ confluentinc/cp-ksqldb-server:latest
 
 ### pour avoir un client à l'interieur du conteneur du serveur ksqldb
 ```bash
-docker run exec -it ksqldb-server ksql http://localhost:8088
+docker exec -it ksqldb-server ksql http://localhost:8088
+
+```sql
+CREATE STREAM users_stream (user_id INT KEY, first_name STRING,last_name STRING,email STRING) WITH (kafka_topic='users',value_format='JSON',partitions=4);
+````
+
+## Exemple 
+```
+CREATE STREAM orders (
+  order_id INT,
+  customer_id INT,
+  product_id INT
+) WITH (
+  KAFKA_TOPIC='orders_topic',
+  VALUE_FORMAT='JSON'
+);
+
+CREATE STREAM customers (
+  customer_id INT,
+  customer_name STRING
+) WITH (
+  KAFKA_TOPIC='customers_topic',
+  VALUE_FORMAT='JSON'
+);
+
+CREATE STREAM enriched_orders AS
+SELECT orders.order_id,
+       orders.product_id,
+       orders.customer_id,
+       customers.customer_name
+FROM orders
+JOIN customers WITHIN 10 MINUTES
+ON orders.customer_id = customers.customer_id;
 
 ```
