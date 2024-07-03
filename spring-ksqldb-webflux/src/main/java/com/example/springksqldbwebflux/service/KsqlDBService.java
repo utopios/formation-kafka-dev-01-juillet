@@ -16,8 +16,8 @@ public class KsqlDBService {
 
     public Flux<String> executeKsqlQuery(String query) {
         String body = "{\"ksql\": \""+query +"\", \"streamProperties\": {}}";
-        return webClient.post().uri("/query-stream")
-                .header("Content-type", "application/vnd.ksql.v1+json; charset=utf-8")
+        return webClient.post().uri("/ksql")
+                .header("Content-type", "application/json")
                 .body(BodyInserters.fromValue(body)).retrieve().bodyToFlux(String.class);
     }
 }
