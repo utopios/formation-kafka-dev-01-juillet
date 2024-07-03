@@ -63,3 +63,9 @@ docker run -d \
 -p 8088:8088 \
 confluentinc/cp-ksqldb-server:latest
 ```
+
+### pour avoir un client à l'interieur du conteneur du serveur ksqldb
+```bash
+docker run exec -it ksqldb-server ksql http://localhost:8088
+
+```
