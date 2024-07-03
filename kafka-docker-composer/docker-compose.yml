@@ -45,7 +45,6 @@ services:
             KAFKA_JMX_PORT: 10002
             KAFKA_JMX_HOSTNAME: localhost
             KAFKA_BROKER_RACK: rack-0
-            KAFKA_OPTS: -javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar=8091:/tmp/kafka_config.yml
             KAFKA_MIN_INSYNC_REPLICAS: 2
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
@@ -88,7 +87,6 @@ services:
             KAFKA_JMX_PORT: 10003
             KAFKA_JMX_HOSTNAME: localhost
             KAFKA_BROKER_RACK: rack-0
-            KAFKA_OPTS: -javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar=8091:/tmp/kafka_config.yml
             KAFKA_MIN_INSYNC_REPLICAS: 2
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
@@ -131,7 +129,6 @@ services:
             KAFKA_JMX_PORT: 10004
             KAFKA_JMX_HOSTNAME: localhost
             KAFKA_BROKER_RACK: rack-0
-            KAFKA_OPTS: -javaagent:/tmp/jmx_prometheus_javaagent-0.20.0.jar=8091:/tmp/kafka_config.yml
             KAFKA_MIN_INSYNC_REPLICAS: 2
             KAFKA_METRIC_REPORTERS: io.confluent.metrics.reporter.ConfluentMetricsReporter
             KAFKA_CONFLUENT_LICENSE_TOPIC_REPLICATION_FACTOR: 3
