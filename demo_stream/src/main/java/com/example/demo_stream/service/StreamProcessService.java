@@ -11,13 +11,13 @@ import org.springframework.kafka.annotation.EnableKafkaStreams;
 @EnableKafkaStreams
 public class StreamProcessService {
 
-    @Bean
-    public KStream<String, String> kStream(StreamsBuilder streamsBuilder) {
-        KStream<String, String> kStream = streamsBuilder.stream("demo-stream-topic");
-        KStream<String, String> aggregatedStream = kStream.mapValues(value -> " " + value +" ").groupByKey()
-                .reduce((oldElement, newElement) -> oldElement + newElement).toStream();
-
-        aggregatedStream.to("demo-output-stream-topic");
-        return aggregatedStream;
-    }
+//    @Bean
+//    public KStream<String, String> kStream(StreamsBuilder streamsBuilder) {
+//        KStream<String, String> kStream = streamsBuilder.stream("demo-stream-topic");
+//        KStream<String, String> aggregatedStream = kStream.mapValues(value -> " " + value +" ").groupByKey()
+//                .reduce((oldElement, newElement) -> oldElement + newElement).toStream();
+//
+//        aggregatedStream.to("demo-output-stream-topic");
+//        return aggregatedStream;
+//    }
 }
