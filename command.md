@@ -41,3 +41,10 @@ docker run --name postgres-container -e POSTGRES_PASSWORD=yourpassword -p 5432:5
 ```bash
 curl -X POST -H "Content-Type: application/vnd.schemaregistry.v1+json" --data @user.json http://localhost:8081/subjects/user-value/versions
 ```
+
+
+### Utilisation de kafa Streams
+## Exemple 1
+1. Collecte des logs "TOPIC"
+2. Traitement des logs "Stream"
+3. Alert "TOPIC"
