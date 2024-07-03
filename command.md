@@ -73,7 +73,7 @@ CREATE STREAM users_stream (user_id INT KEY, first_name STRING,last_name STRING,
 ````
 
 ## Exemple 
-```
+```bash
 CREATE STREAM orders (
   order_id INT,
   customer_id INT,
@@ -99,5 +99,9 @@ SELECT orders.order_id,
 FROM orders
 JOIN customers WITHIN 10 MINUTES
 ON orders.customer_id = customers.customer_id;
-
 ```
+
+### Fields exercice 8
+
+temperature_readings => sensor_id, zone_id, temperature, timestamp
+humidity_readings => sensor_id, zone_id, humidity, timestamp
